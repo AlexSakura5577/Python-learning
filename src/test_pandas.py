@@ -59,32 +59,147 @@
 # # print("\nФайл с высокими зарплатами сохранён как 'high_salary.csv'")
 #..............................................................................
 
-# 
+# # Загрузка и просмотр файла по ссылке (в корень проекта):
+# import gdown
+# import pandas as pd
+# import os
 
+# def download_and_display(file_id, output_path):
+#     """
+#     Загружает файл с Google Drive, сохраняет его и выводит содержимое как таблицу.
+    
+#     Args:
+#         file_id (str): Идентификатор файла на Google Drive.
+#         output_path (str): Путь для сохранения загруженного файла.
+#     """
+#     # Проверка, существует ли файл
+#     if os.path.exists(output_path):
+#         print(f"Файл уже существует: {output_path}")
+#     else:
+#         # Формируем ссылку на Google Drive
+#         url = f"https://drive.google.com/uc?id={file_id}"
+        
+#         print("Начинаем загрузку файла...")
+#         gdown.download(url, output_path, quiet=False)
+#         print("Файл успешно загружен!")
+    
+#     # Читаем файл с помощью pandas
+#     try:
+#         df = pd.read_csv(output_path)
+#         print("\nТаблица данных:")
+#         print(df)
+#     except Exception as e:
+#         print(f"Ошибка при чтении файла: {e}")
+
+# # Параметры
+# file_id = "15wz0Z03VgvPGvLfgjQvWFVIds_s_e_Rz"  # Идентификатор тестового файла
+# output_path = "test_data.csv"                  # Имя для сохранения файла
+
+# # Вызов функции
+# download_and_display(file_id, output_path)
 #..............................................................................
 
-# 
+# # Загрузка и просмотр файла по ссылке (рядом с вызываемым скриптом):
+# import os
+# import pandas as pd
+# import gdown
 
+# def download_and_display(file_id, output_filename):
+#     """
+#     Загружает файл с Google Drive и отображает его содержимое как таблицу.
+    
+#     :param file_id: ID файла на Google Drive
+#     :param output_filename: Имя файла для сохранения (включая путь относительно скрипта)
+#     """
+#     try:
+#         # Определяем путь к папке скрипта
+#         script_dir = os.path.dirname(__file__)  # Папка, где находится текущий скрипт
+#         output_path = os.path.join(script_dir, output_filename)  # Полный путь к файлу
+
+#         # Убедимся, что директория для сохранения существует
+#         os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+#         # Проверяем, существует ли файл уже
+#         if os.path.exists(output_path):
+#             print(f"Файл уже существует: {output_path}")
+#         else:
+#             # Формируем URL для загрузки
+#             url = f"https://drive.google.com/uc?id={file_id}"
+#             print("Начинаем загрузку файла...")
+
+#             # Загружаем файл
+#             gdown.download(url, output_path, quiet=False)
+#             print("Файл успешно загружен!")
+
+#         # Читаем и отображаем таблицу
+#         df = pd.read_csv(output_path)
+#         print("\nТаблица данных:")
+#         print(df)
+
+#     except Exception as e:
+#         print(f"Произошла ошибка: {e}")
+
+# # Пример вызова функции
+# file_id = "15wz0Z03VgvPGvLfgjQvWFVIds_s_e_Rz"  # Укажи свой идентификатор файла
+# # Можно к имени файла дописывать относительный путь если нужно
+# download_and_display(file_id, "gdown_test.csv")  # Файл сохраняется в папке src
 #..............................................................................
 
-# 
+# # Чтение данных из CSV
+# import pandas as pd
 
+# df = pd.read_csv('src/gdown_test.csv')
+
+# # Выводим первые 5 строк
+# print(df.head())
 #..............................................................................
 
-# 
+# # Чтение данных из Excel
+# import pandas as pd
 
+# df = pd.read_excel('src/test_excel.xlsx')
+
+# # Выводим первые 5 строк
+# print(df.head())
 #..............................................................................
 
-# 
+# # Чтение данных из JSON
+# import pandas as pd
 
+# df = pd.read_json('путь_к_файлу.json')
+
+# # Выводим первые 5 строк
+# print(df.head())
 #..............................................................................
 
-# 
+# Фильтрация данных из CSV
+import pandas as pd
 
-#..............................................................................
+df = pd.read_csv('src/gdown_test.csv')
 
-# 
+# Удалить лишние пробелы в названиях столбцов:
+df.columns = df.columns.str.strip()
 
+# # Убираем пробелы из значений в столбце 'цена' и конвертируем в тип float
+# df['цена'] = df['цена'].str.replace(' ', '').astype(float)
+
+# Убираем пробелы из значений в столбце 'цена' и конвертируем в тип int
+df['цена'] = df['цена'].str.replace(' ', '').astype(int)
+
+# Фильтрация авто дороже 10000
+filtered_car = df[df['цена'] > 10000]
+
+# Сохраняем отфильтрованные данные в новый CSV
+filtered_car.to_csv('src/filtered_car.csv', index=False)
+
+# Выводим результат
+print(filtered_car)
+
+# Конвертирование этого нового CSV в Excel.
+filtered_car.to_excel('src/filtered_car.xlsx', index=False)
+
+# Выводим сообщение о завершении
+print("Файл успешно сохранён в Excel.")
 #..............................................................................
 
 # 
