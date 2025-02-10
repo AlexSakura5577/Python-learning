@@ -21,11 +21,13 @@
 #......................................................................................
 
 # Современный способ вызова:
-
 import openai
+import os
+from dotenv import load_dotenv
 
-# Замените на ваш API-ключ
-OPENAI_API_KEY = "ключ сюда"
+load_dotenv()  # Загружаем переменные окружения из .env
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")  # Берем ключ из окружения
 
 # Устанавливаем API-ключ
 client = openai.OpenAI(api_key=OPENAI_API_KEY)
@@ -42,6 +44,8 @@ def ask_gpt(prompt):
 user_input = "Привет, расскажи шутку!"
 answer = ask_gpt(user_input)
 print("Ответ от ChatGPT:", answer)
+#......................................................................................
+
 
 # # Проверка баланса:
 # import openai
@@ -55,7 +59,7 @@ print("Ответ от ChatGPT:", answer)
 #     print("Баланс OpenAI API:", balance)
 # except Exception as e:
 #     print("Ошибка:", e)
-
+#......................................................................................
 
 
 
