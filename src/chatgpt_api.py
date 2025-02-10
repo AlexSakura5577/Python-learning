@@ -27,7 +27,7 @@ from dotenv import load_dotenv
 
 load_dotenv()  # Загружаем переменные окружения из .env
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")  # Берем ключ из окружения
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")  # ключ хранится в .env
 
 # Устанавливаем API-ключ
 client = openai.OpenAI(api_key=OPENAI_API_KEY)
